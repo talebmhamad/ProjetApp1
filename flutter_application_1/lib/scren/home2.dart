@@ -12,9 +12,7 @@ class home2 extends StatefulWidget {
 }
 
 class _home2State extends State<home2> {    int index=0;
-List<Widget>scren=[home2(),home3()
-    
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +20,7 @@ appBar: AppBar(
   automaticallyImplyLeading: false,
   centerTitle: true, title: const Text("home2",),backgroundColor:Color.fromARGB(255, 11, 64, 223),),
   body:
-  scren[index],
+ Container(), 
 
   bottomNavigationBar: BottomNavigationBar(
     onTap: (value){
