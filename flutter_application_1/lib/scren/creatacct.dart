@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/scren/home2.dart';
 
 class createacct extends StatefulWidget {
   const createacct({super.key});
@@ -8,6 +9,7 @@ class createacct extends StatefulWidget {
 }
 
 class _createacctState extends State<createacct> {
+  final formkey = GlobalKey<FormState>();
   @override
   bool isObscured = true;
   bool isObscured1 = true;
@@ -17,7 +19,7 @@ appBar: AppBar(backgroundColor: Color.fromARGB(255, 45, 113, 231),),
 body:Container(
   color: Color.fromARGB(255, 45, 113, 231),
   child: Form(
-   
+   key:formkey ,
     child: 
   Column(
     children:  [ const SizedBox(height: 120,), const Center(child: Text("Sign Up",style: TextStyle(color: Colors.white,
@@ -106,7 +108,7 @@ const SizedBox(height: 15),
            
            validator: (value) {
             if(value!.isEmpty){
-             return'enter new password';
+             return'enter  password';
              }
            },
         
@@ -132,7 +134,10 @@ const SizedBox(height: 15),
           ),SizedBox(height: 18),
          ElevatedButton(onPressed: (){
 
+ if(formkey.currentState!.validate()){
+Navigator.pushReplacement(context, MaterialPageRoute(builder:(((context) =>home2()))));
 
+ }
 
 
 

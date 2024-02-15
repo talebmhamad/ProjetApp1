@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: login(),);
+    return  MaterialApp(home: login(),debugShowCheckedModeBanner: false,);
     
   }
 } 
@@ -55,7 +55,7 @@ body:Container(
     key: formkey,
     child: 
   Column(
-    children:  [ const SizedBox(height: 100,), const Center(child: Text("TalebShop",style: TextStyle(color: Colors.white,
+    children:  [ const SizedBox(height: 100,), const Center(child: Text("BOBSTORE",style: TextStyle(color: Colors.white,
             fontSize: 45,fontWeight: FontWeight.bold,fontStyle: FontStyle.normal // Adjust the font size as needed
           ),),
           ), const SizedBox(height: 60),
@@ -195,13 +195,6 @@ shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           ],
   ),),
 )
-
-
-
-
-
-
-
 
 
 
