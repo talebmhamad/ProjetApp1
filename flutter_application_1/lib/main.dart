@@ -1,38 +1,54 @@
-
-
-
-
-
+// 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/class/users.dart';
+import 'package:flutter_application_1/scren/checklogin.dart';
 import 'package:flutter_application_1/scren/creatacct.dart';
 import 'package:flutter_application_1/scren/forgetpass.dart';
 import 'package:flutter_application_1/scren/home2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+
+
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => TextEditingController(), // Provide the TextEditingController
+      child: const MyApp(),
+    ),
+  );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: login(),debugShowCheckedModeBanner: false,);
+    return  MaterialApp(home: check(),debugShowCheckedModeBanner: false,);
     
   }
 } 
 class login extends StatefulWidget {
-   
- 
   @override
   State<login> createState() => _loginState();
+
 }
 
 class _loginState extends State<login> {
 
   final formkey = GlobalKey<FormState>();
+   
+  setuser(int id) async{
+  SharedPreferences local = await SharedPreferences.getInstance();
+  local.setInt('id', id);
+}
+
+setname(String name) async{
+  SharedPreferences local = await SharedPreferences.getInstance();
+  local.setString('name', name);
+}
+
   TextEditingController name =TextEditingController();
      TextEditingController password =TextEditingController();
   @override
@@ -109,7 +125,7 @@ body:Container(
       // labelText: 'Password', 
       hintText: 'Enter your password',
       prefixIcon: Icon(Icons.lock),
-      suffixIcon: IconButton(onPressed: (){
+      suffixIcon: IconButton(  onPressed:  (){
     setState(() {
       
       isObscured = !isObscured; 
@@ -125,13 +141,14 @@ body:Container(
           ))
           
           )
-          ,SizedBox(height: 10,),ElevatedButton(onPressed: (){
+          ,SizedBox(height: 10,),ElevatedButton(onPressed:  (){
             if(formkey.currentState!.validate()){
   
   for(user u in users){
   if(u.name.toLowerCase()==name.text.toLowerCase() && u.password.toLowerCase()==password.text.toLowerCase()){
-  
-  Navigator.push(context, MaterialPageRoute(builder: ((context) => home2())));break;
+    setuser(u.id);
+  setname(u.name);
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => home2())));break;
   
   }else{
  
@@ -168,8 +185,7 @@ Navigator.push(context, MaterialPageRoute(builder: ((context) => forget())));
 SizedBox(height: 15,),
 const Text("____________________  OR  ___________________",style: TextStyle(color: const Color.fromARGB(255, 228, 228, 227)),),SizedBox(height: 30,),
 
-ElevatedButton(onPressed: (){
-
+ElevatedButton(onPressed: ()async{
 
 Navigator.push(context, MaterialPageRoute(builder: ((context) => createacct())));
 
@@ -199,21 +215,5 @@ shape: MaterialStateProperty.all<RoundedRectangleBorder>(
 
 
     );
-  }
-}class home3 extends StatelessWidget {
-  const home3 ({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text("hi"),);
-  }
-}
-
-class home4 extends StatelessWidget {
-  const home4({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text("hello"),);
   }
 }

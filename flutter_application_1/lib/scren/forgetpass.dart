@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/model/article.dart';
+import 'package:flutter_application_1/services/get-news.dart';
+import 'package:flutter_application_1/services/getproduct.dart';
+import 'package:http/http.dart';
 
 class forget extends StatefulWidget {
    forget({super.key});
@@ -101,10 +105,13 @@ Visibility(
  const SizedBox(height: 18),
          Visibility(
            visible: !isvisible,
-           child: ElevatedButton(onPressed: (){
+           child: ElevatedButton(onPressed: (){ getproduct();
+
+
+            
             if(email !=null){
             if(formkey.currentState!.validate()){
-  
+            
            setState(() {
             
 
@@ -132,6 +139,8 @@ Visibility(
   Visibility(
     visible: isvisible,
     child: ElevatedButton(onPressed: (){
+
+
 if(formkey.currentState!.validate()){}
 
     },style: ButtonStyle(
